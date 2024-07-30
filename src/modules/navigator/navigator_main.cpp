@@ -220,6 +220,20 @@ void Navigator::run()
 		/* global position updated */
 		if (_global_pos_sub.updated()) {
 			_global_pos_sub.copy(&_global_pos);
+
+			// Navigator assumes that fields are NAN when not valid
+			if (!_global_pos.lat_lon_valid) {
+				_global_pos.lat = NAN;
+				_global_pos.lon = NAN;
+			}
+
+			if (!_global_pos.alt_valid) {
+				_global_pos.alt = NAN;
+			}
+
+			if (!_global_pos.alt_ellipsoid_valid) {
+				_global_pos.alt_ellipsoid = NAN;
+			}
 		}
 
 		/* check for parameter updates */
