@@ -100,7 +100,7 @@ private:
 	bool		_nav_test_passed{false};	///< true if the post takeoff navigation test has passed
 	bool		_nav_test_failed{false};	///< true if the post takeoff navigation test has failed
 
-	bool _position_reliant_on_optical_flow{false};
+	bool _position_reliant_on_velocity_aided_dead_reckoning{false};
 
 	bool _gps_was_fused{false};
 	bool _gnss_spoofed{false};

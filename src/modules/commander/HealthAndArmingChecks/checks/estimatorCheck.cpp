@@ -534,17 +534,10 @@ void EstimatorChecks::checkEstimatorStatusFlags(const Context &context, Report &
 
 	if (_estimator_status_flags_sub.copy(&estimator_status_flags)) {
 
-		bool dead_reckoning = estimator_status_flags.cs_wind_dead_reckoning
-				      || estimator_status_flags.cs_inertial_dead_reckoning;
-
-		if (!dead_reckoning) {
-			// position requirements (update if not dead reckoning)
-			bool gps             = estimator_status_flags.cs_gps;
-			bool optical_flow    = estimator_status_flags.cs_opt_flow;
-			bool vision_position = estimator_status_flags.cs_ev_pos;
-
-			_position_reliant_on_optical_flow = !gps && optical_flow && !vision_position;
-		}
+		_position_reliant_on_velocity_aided_dead_reckoning = !estimator_status_flags.cs_inertial_dead_reckoning
+				&& !estimator_status_flags.cs_ev_pos
+				&& !estimator_status_flags.cs_gps // TODO: split GNSS pos and vel
+				&& !estimator_status_flags.cs_aux_gpos;
 
 		// Check for a magnetometer fault and notify the user
 		if (estimator_status_flags.cs_mag_fault) {
@@ -725,9 +718,10 @@ void EstimatorChecks::setModeRequirementFlags(const Context &context, bool pre_f
 	float lpos_eph_threshold_relaxed = lpos_eph_threshold;
 
 	// Set the allowable position uncertainty based on combination of flight and estimator state
-	// When we are in a operator demanded position control mode and are solely reliant on optical flow,
+	// When we are in a operator demanded position control mode and are solely reliant on velocity-aided dead reckoning
+	// (i.e.: no position fixing sensor but velocity aiding is active),
 	// do not check position error because it will gradually increase throughout flight and the operator will compensate for the drift
-	if (_position_reliant_on_optical_flow) {
+	if (_position_reliant_on_velocity_aided_dead_reckoning) {
 		lpos_eph_threshold_relaxed = INFINITY;
 	}
 
