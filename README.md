@@ -20,6 +20,31 @@ PX4 is highly portable, OS-independent and supports Linux, NuttX and MacOS out o
   * many more experimental types (Blimps, Boats, Submarines, High altitude balloons, etc)
 * Releases: [Downloads](https://github.com/PX4/PX4-Autopilot/releases)
 
+## Caleuche Fork
+This repository is a fork of the main PX4-Autopilot branch ```release/1.14```. This release is the last stable release of PX4, and the version that Caleuche Team uses in it's UAV. The main reason for this fork is to keep track of custom changes made on top of ```release/1.14``` made by Caleuche Team.
+
+## Modifications made to PX4 Gazebo Simulation
+### Custom X500 Quadcopter
+A x500 quadcopter with a downward facing camera was added to the PX4 Gazebo enviroment. The model is similar to the Team's UAV and is used for testing and simulation purposes. The camera added to the model has similar characteristics to the one used in the real UAV. To launch the simulation with this model, run the following command:
+```bash
+make px4_sitl gz_x500_mono_cam
+```
+### RobotX Challenge Task Objects
+Some of the objects used in the RobotX Challenge were added to the PX4 Gazebo enviroment. These objects are used for testing and simulation purposes. Currently the following objects are available:
+- ```Landing Pad```
+- ```Red Can```
+- ```Green Can```
+- ```Blue Can```
+- ```April Tag WAM-V Array```
+
+These objects can be added to a running simulation using the Resource Spawner availabe in the Gazebo GUI or by making a custom world file.
+
+### World Files for Task 7 and Task 8
+TODO
+
+## Changes to uXRCE-DDS Client
+Some changes were made to the uXRCE-DDS Client, to expose some uORB topics to the ROS2 enviroment. This is achieved by modifying the ```dds_topics.yaml``` file ```src/modules/uxrce_dds_client```. The extra topics exposed are:
+- ```irlock_report ```
 
 ## Building a PX4 based drone, rover, boat or robot
 
