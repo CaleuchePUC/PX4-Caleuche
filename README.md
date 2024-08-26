@@ -29,6 +29,10 @@ A x500 quadcopter with a downward facing camera was added to the PX4 Gazebo envi
 ```bash
 make px4_sitl gz_x500_mono_cam
 ```
+Also if you want to expose the camera gazebo topic to ROS2 you can use the following command in a new terminal:
+```bash
+ros2 run ros_gz_bridge parameter_bridge /oak_1_w/rgb/image_raw@sensor_msgs/msg/Image@gz.msgs.Image
+```
 ### RobotX Challenge Task Objects
 Some of the objects used in the RobotX Challenge were added to the PX4 Gazebo enviroment. These objects are used for testing and simulation purposes. Currently the following objects are available:
 - ```Landing Pad```
