@@ -5,17 +5,17 @@
 #####
 publications:
 
-  - topic: /fmu/out/collision_constraints
-    type: px4_msgs::msg::CollisionConstraints
+  # - topic: /fmu/out/collision_constraints
+  #   type: px4_msgs::msg::CollisionConstraints
 
-  - topic: /fmu/out/failsafe_flags
-    type: px4_msgs::msg::FailsafeFlags
+  # - topic: /fmu/out/failsafe_flags
+  #   type: px4_msgs::msg::FailsafeFlags
 
-  - topic: /fmu/out/position_setpoint_triplet
-    type: px4_msgs::msg::PositionSetpointTriplet
+  # - topic: /fmu/out/position_setpoint_triplet
+  #   type: px4_msgs::msg::PositionSetpointTriplet
 
-  - topic: /fmu/out/sensor_combined
-    type: px4_msgs::msg::SensorCombined
+  # - topic: /fmu/out/sensor_combined
+  #   type: px4_msgs::msg::SensorCombined
 
   - topic: /fmu/out/timesync_status
     type: px4_msgs::msg::TimesyncStatus
@@ -32,8 +32,8 @@ publications:
   - topic: /fmu/out/vehicle_global_position
     type: px4_msgs::msg::VehicleGlobalPosition
 
-  - topic: /fmu/out/vehicle_gps_position
-    type: px4_msgs::msg::SensorGps
+  # - topic: /fmu/out/vehicle_gps_position
+  #   type: px4_msgs::msg::SensorGps
 
   - topic: /fmu/out/vehicle_local_position
     type: px4_msgs::msg::VehicleLocalPosition
@@ -55,11 +55,11 @@ subscriptions:
   - topic: /fmu/in/onboard_computer_status
     type: px4_msgs::msg::OnboardComputerStatus
 
-  - topic: /fmu/in/obstacle_distance
-    type: px4_msgs::msg::ObstacleDistance
+  # - topic: /fmu/in/obstacle_distance
+  #   type: px4_msgs::msg::ObstacleDistance
 
-  - topic: /fmu/in/sensor_optical_flow
-    type: px4_msgs::msg::SensorOpticalFlow
+  # - topic: /fmu/in/sensor_optical_flow
+  #   type: px4_msgs::msg::SensorOpticalFlow
 
   - topic: /fmu/in/telemetry_status
     type: px4_msgs::msg::TelemetryStatus
@@ -70,8 +70,8 @@ subscriptions:
   - topic: /fmu/in/vehicle_attitude_setpoint
     type: px4_msgs::msg::VehicleAttitudeSetpoint
 
-  - topic: /fmu/in/vehicle_mocap_odometry
-    type: px4_msgs::msg::VehicleOdometry
+  # - topic: /fmu/in/vehicle_mocap_odometry
+  #   type: px4_msgs::msg::VehicleOdometry
 
   - topic: /fmu/in/vehicle_rates_setpoint
     type: px4_msgs::msg::VehicleRatesSetpoint
