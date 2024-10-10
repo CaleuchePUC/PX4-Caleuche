@@ -56,6 +56,7 @@
 #include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/sensor_baro.h>
 #include <uORB/topics/vehicle_odometry.h>
+#include <uORB/topics/distance_sensor.h>
 
 #include <gz/math.hh>
 #include <gz/msgs.hh>
@@ -102,6 +103,7 @@ private:
 	void imuCallback(const gz::msgs::IMU &imu);
 	void poseInfoCallback(const gz::msgs::Pose_V &pose);
 	void odometryCallback(const gz::msgs::OdometryWithCovariance &odometry);
+	void rangeFinderCallback(const gz::msgs::LaserScan &scan);
 
 	/**
 	*
@@ -126,6 +128,7 @@ private:
 	uORB::PublicationMulti<sensor_accel_s> _sensor_accel_pub{ORB_ID(sensor_accel)};
 	uORB::PublicationMulti<sensor_gyro_s>  _sensor_gyro_pub{ORB_ID(sensor_gyro)};
 	uORB::PublicationMulti<vehicle_odometry_s> _visual_odometry_pub{ORB_ID(vehicle_visual_odometry)};
+	uORB::PublicationMulti<distance_sensor_s> _distance_sensor_pub{ORB_ID(distance_sensor)};
 
 	GZMixingInterfaceESC   _mixing_interface_esc{_node, _node_mutex};
 	GZMixingInterfaceServo _mixing_interface_servo{_node, _node_mutex};

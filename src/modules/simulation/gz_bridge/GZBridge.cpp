@@ -43,6 +43,8 @@
 #include <iostream>
 #include <string>
 
+#include <lib/drivers/device/Device.hpp>
+
 GZBridge::GZBridge(const char *world, const char *name, const char *model,
 		   const char *pose_str) :
 	ModuleParams(nullptr),
@@ -181,6 +183,13 @@ int GZBridge::init()
 		return PX4_ERROR;
 	}
 
+	//Range finder callback
+	std::string rangefinder_topic = "/rangefinder";
+	if (!_node.Subscribe(rangefinder_topic, &GZBridge::rangeFinderCallback, this)) {
+		PX4_ERR("failed to subscribe to %s", rangefinder_topic.c_str());
+		return PX4_ERROR;
+	}
+
 	if (!_mixing_interface_esc.init(_model_name)) {
 		PX4_ERR("failed to init ESC output");
 		return PX4_ERROR;
@@ -193,6 +202,31 @@ int GZBridge::init()
 
 	ScheduleNow();
 	return OK;
+}
+
+void GZBridge::rangeFinderCallback(const gz::msgs::LaserScan &scan)
+{
+	distance_sensor_s msg = {};
+	msg.timestamp = hrt_absolute_time();
+
+	device::Device::DeviceId id;
+	id.devid_s.bus_type = device::Device::DeviceBusType::DeviceBusType_SIMULATION;
+	id.devid_s.bus = 1;
+	id.devid_s.address = 1;
+	id.devid_s.devtype = DRV_DIST_DEVTYPE_SIM;
+	msg.device_id = id.devid;
+
+	msg.min_distance = static_cast<float>(scan.range_min());
+	msg.max_distance = static_cast<float>(scan.range_max());
+	msg.current_distance = static_cast<float>(scan.ranges()[0]);
+	msg.variance = 0.0f;
+	msg.signal_quality = -1;
+	msg.type = distance_sensor_s::MAV_DISTANCE_SENSOR_LASER;
+	msg.h_fov = 0;
+	msg.v_fov = 0;
+	msg.orientation = distance_sensor_s::ROTATION_DOWNWARD_FACING;
+
+	_distance_sensor_pub.publish(msg);
 }
 
 int GZBridge::task_spawn(int argc, char *argv[])
@@ -755,3 +789,4 @@ extern "C" __EXPORT int gz_bridge_main(int argc, char *argv[])
 {
 	return GZBridge::main(argc, argv);
 }
+
