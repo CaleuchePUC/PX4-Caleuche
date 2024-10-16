@@ -44,7 +44,14 @@ Some of the objects used in the RobotX Challenge were added to the PX4 Gazebo en
 These objects can be added to a running simulation using the Resource Spawner availabe in the Gazebo GUI or by making a custom world file.
 
 ### World Files for Task 7 and Task 8
-TODO
+World files for Task 7 and Task 8 of the RobotX Challenge were added to the PX4 Gazebo enviroment. These world files are used for testing and simulation purposes. To launch the simulation with these world files, run the following command:
+
+#### Task 7
+To run the world file for Task 7, first uncomment the 5th line in the x500_mono_cam model.sdf file located in ```Tools/simulation/gz/models/x500_mono_cam/model.sdf```. Then run the following command:
+```bash
+PX4_GZ_WORLD=custom_uav_replenishment make px4_sitl gz_x500_mono_cam
+```
+
 
 ## Changes to uXRCE-DDS Client
 Some changes were made to the uXRCE-DDS Client, to expose some uORB topics to the ROS2 enviroment. This is achieved by modifying the ```dds_topics.yaml``` file ```src/modules/uxrce_dds_client```. The extra topics exposed are:

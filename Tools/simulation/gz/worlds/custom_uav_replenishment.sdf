@@ -1,0 +1,197 @@
+<sdf version='1.9'>
+  <world name='custom_uav_replenishment'>
+    <!-- Physics -->
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+
+    <!-- Plugins for Gazebo Sim -->
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <plugin name='gz::sim::systems::Imu' filename='gz-sim-imu-system'/>
+    <plugin name='gz::sim::systems::AirPressure' filename='gz-sim-air-pressure-system'/>
+    <plugin name='gz::sim::systems::Sensors' filename='gz-sim-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- GUI -->
+        <gui fullscreen='false'>
+      <plugin name='3D View' filename='GzScene3D'>
+        <gz-gui>
+          <title>3D View</title>
+          <property type='bool' key='showTitleBar'>0</property>
+          <property type='string' key='state'>docked</property>
+        </gz-gui>
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <ambient_light>0.5984631152222222 0.5984631152222222 0.5984631152222222</ambient_light>
+        <background_color>0.8984631152222222 0.8984631152222222 0.8984631152222222</background_color>
+        <camera_pose>-6 0 6 0 0.5 0</camera_pose>
+      </plugin>
+      <plugin name='World control' filename='WorldControl'>
+        <gz-gui>
+          <title>World control</title>
+          <property type='bool' key='showTitleBar'>0</property>
+          <property type='bool' key='resizable'>0</property>
+          <property type='double' key='height'>72</property>
+          <property type='double' key='width'>121</property>
+          <property type='double' key='z'>1</property>
+          <property type='string' key='state'>floating</property>
+          <anchors target='3D View'>
+            <line own='left' target='left'/>
+            <line own='bottom' target='bottom'/>
+          </anchors>
+        </gz-gui>
+        <play_pause>1</play_pause>
+        <step>1</step>
+        <start_paused>1</start_paused>
+      </plugin>
+      <plugin name='World stats' filename='WorldStats'>
+        <gz-gui>
+          <title>World stats</title>
+          <property type='bool' key='showTitleBar'>0</property>
+          <property type='bool' key='resizable'>0</property>
+          <property type='double' key='height'>110</property>
+          <property type='double' key='width'>290</property>
+          <property type='double' key='z'>1</property>
+          <property type='string' key='state'>floating</property>
+          <anchors target='3D View'>
+            <line own='right' target='right'/>
+            <line own='bottom' target='bottom'/>
+          </anchors>
+        </gz-gui>
+        <sim_time>1</sim_time>
+        <real_time>1</real_time>
+        <real_time_factor>1</real_time_factor>
+        <iterations>1</iterations>
+      </plugin>
+      <plugin name='Entity tree' filename='EntityTree'/>
+    </gui>
+
+    <!-- Lighting and Scene Settings -->
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Ground Plane -->
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Sun Light -->
+    <light name='sun' type='directional'>
+      <pose>0 0 500 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+    </light>
+
+    <!-- Landing Pad -->
+    <include>
+      <uri>model://landingpad</uri>
+      <name>landingpad</name>
+      <pose>5 0 0 0 0 0</pose> <!-- Landing pad position -->
+    </include>
+
+    <!-- Can 1 (Red) -->
+    <include>
+      <uri>model://red_can</uri>
+      <name>red_can1</name>
+      <pose>5 -0.6 0.5 0 0 0</pose>
+    </include>
+
+    <!-- Can 2 (Blue) -->
+    <include>
+      <uri>model://blue_can</uri>
+      <name>blue_can1</name>
+      <pose>4.6 0.5 0.5 0 0 0</pose>
+    </include>
+
+    <!-- Can 3 (Green) -->
+    <include>
+      <uri>model://green_can</uri>
+      <name>green_can1</name>
+      <pose>5.4 0.7 0.5 0 0 0</pose>
+    </include>
+
+    <!-- Second Landing Pad-->
+    <include>
+      <uri>model://landingpad</uri>
+      <pose>12 -6.4 0 0 0 0</pose> <!-- Second landing pad position -->
+      <name>landingpad_1</name>
+    </include>
+
+    <!-- Can 1 (Red) -->
+    <include>
+      <uri>model://red_can</uri>
+      <name>red_can2</name>
+      <pose>12.8 -6.8 0.5 0 0 0</pose>
+    </include>
+
+    <!-- Can 2 (Blue) -->
+    <include>
+      <uri>model://blue_can</uri>
+      <name>blue_can2</name>
+      <pose>11.2 -6.1 0.5 0 0 0</pose>
+    </include>
+
+    <!-- Can 3 (Green) -->
+    <include>
+      <uri>model://green_can</uri>
+      <name>green_can2</name>
+      <pose>12.1 -6.0 0.5 0 0 0</pose>
+    </include>
+
+    <!-- wamv simulated -->
+    <include>
+      <uri>model://wamv_caleuche</uri>
+      <pose>0 5 0.5 0 0 0</pose> <!-- WAM-V position -->
+    </include>
+
+  </world>
+</sdf>
+
+
+

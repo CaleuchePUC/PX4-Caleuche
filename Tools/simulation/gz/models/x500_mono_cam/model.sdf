@@ -2,6 +2,8 @@
 <sdf version='1.9'>
   <model name='x500_mono_cam'>
 
+    <!-- <pose>0 5 2 0 0 0</pose> --> <!-- Uncomment to use task 7 world-->
+
     <include merge='true'>
       <uri>x500</uri>
     </include>
