@@ -47,6 +47,9 @@ publications:
   - topic: /fmu/out/vehicle_trajectory_waypoint_desired
     type: px4_msgs::msg::VehicleTrajectoryWaypoint
 
+  - topic: /fmu/out/mission_result
+    type: px4_msgs::msg::MissionResult
+
 subscriptions:
 
   - topic: /fmu/in/offboard_control_mode
@@ -90,3 +93,4 @@ subscriptions:
 
   - topic: /fmu/in/irlock_report
     type: px4_msgs::msg::IrlockReport
+
