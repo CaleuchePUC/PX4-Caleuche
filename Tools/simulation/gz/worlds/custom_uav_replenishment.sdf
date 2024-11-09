@@ -187,8 +187,23 @@
     <!-- wamv simulated -->
     <include>
       <uri>model://wamv_caleuche</uri>
+      <name>wamv</name>
       <pose>0 5 0.5 0 0 0</pose> <!-- WAM-V position -->
     </include>
+
+    <!-- Include wamv_apriltag_array model on top of the WAM-V -->
+    <include>
+      <uri>model://wamv_apriltag_array</uri>
+      <name>wamv_apriltag_array</name>
+      <pose>0 5 1.8 0 0 -1.57</pose> <!-- Adjust position as needed -->
+    </include>
+
+    <!-- Fixed Joint to attach wamv_apriltag_array to wamv_caleuche -->
+    <joint name="april_tag_joint" type="fixed">
+      <parent>wamv::wamv_caleuche/base_link</parent>
+      <child>wamv_apriltag_array::link</child>
+      <pose>0 5 2.0 0 0 0</pose> <!-- Adjust offset to place the tag array above the WAM-V -->
+    </joint>
 
   </world>
 </sdf>
