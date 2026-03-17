@@ -108,16 +108,5 @@
 
     </link>
 
-    <plugin
-      filename="gz-sim-robotx-light-buoy-system"
-      name="robotx::RobotXLightBuoySystem">
-      <!-- color: blue | red | green -->
-      <color>blue</color>
-      <!-- mode: solid | flashing -->
-      <mode>flashing</mode>
-      <!-- blink_period en segundos -->
-      <blink_period>1.0</blink_period>
-    </plugin>
-
   </model>
 </sdf>
