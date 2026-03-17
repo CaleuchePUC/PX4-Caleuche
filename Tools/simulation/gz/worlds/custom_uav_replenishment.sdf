@@ -205,6 +205,13 @@
       <pose>0 5 2.0 0 0 0</pose> <!-- Adjust offset to place the tag array above the WAM-V -->
     </joint>
 
+    <!-- RobotX Light Buoy -->
+    <include>
+      <uri>model://robotx_light_buoy</uri>
+      <name>robotx_light_buoy_1</name>
+      <pose>10 10 0 0 0 0</pose>
+    </include>
+
   </world>
 </sdf>
 
