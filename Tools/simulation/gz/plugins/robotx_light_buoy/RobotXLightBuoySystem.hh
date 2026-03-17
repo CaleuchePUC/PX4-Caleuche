@@ -12,15 +12,14 @@
 namespace robotx
 {
 
-/// \brief Plugin de boya RobotX — blinking por creación/eliminación dinámica
-/// de una entidad luz en el ECM.
+/// \brief Plugin de boya RobotX — blinking sin flash, via pose toggle.
 ///
-/// La estrategia es:
-///   - ON : _ecm.CreateEntity() + componentes de luz → SceneManager::CreateLight
-///   - OFF: _ecm.RequestRemoveEntity() → SceneManager remueve la luz de Ogre2
+/// Estrategia: todas las entidades (luz + domos) son permanentes.
+/// Para "apagar": se mueven a z=-10000 (fuera del mundo visible).
+/// Para "encender": se restauran a su posición original.
 ///
-/// Esto usa el camino CreateLight/Remove del SceneManager que SÍ funciona,
-/// a diferencia de modificar propiedades de una luz existente.
+/// Esto elimina el flash negro causado por create/delete de entidades,
+/// que disparaba un re-broadcast completo del SceneBroadcaster.
 ///
 /// Parámetros SDF:
 ///   <color>        blue | red | green   (default: blue)
@@ -43,31 +42,40 @@ public:
     gz::sim::EntityComponentManager &_ecm) override;
 
 private:
-  /// Busca la entidad del link "base_link" dentro del modelo.
-  void FindLinkEntity(gz::sim::EntityComponentManager &_ecm);
+  /// Busca todas las entidades que controlamos (luz + domos).
+  /// Retorna true cuando las encuentra todas.
+  bool FindEntities(gz::sim::EntityComponentManager &_ecm);
 
-  /// Crea dinámicamente la entidad de luz y adjunta los componentes.
-  void CreateDynamicLight(gz::sim::EntityComponentManager &_ecm);
+  /// Mueve una entidad a la pose activa o a la pose oculta.
+  void SetEntityPose(
+    gz::sim::EntityComponentManager &_ecm,
+    gz::sim::Entity _entity,
+    const gz::math::Pose3d &_pose);
 
-  /// Solicita la eliminación de la entidad de luz dinámica.
-  void RemoveDynamicLight(gz::sim::EntityComponentManager &_ecm);
+  /// Aplica el estado ON o OFF moviendo las poses.
+  void ApplyState(gz::sim::EntityComponentManager &_ecm, bool on);
 
 private:
   gz::sim::Entity modelEntity{gz::sim::kNullEntity};
-  gz::sim::Entity linkEntity{gz::sim::kNullEntity};
 
-  /// Entidad de luz creada dinámicamente (kNullEntity = apagada)
-  gz::sim::Entity dynLightEntity{gz::sim::kNullEntity};
+  // Entidades controladas por el plugin
+  gz::sim::Entity lightEntity{gz::sim::kNullEntity};
+  gz::sim::Entity domeOnEntity{gz::sim::kNullEntity};
+  gz::sim::Entity domeOffEntity{gz::sim::kNullEntity};
 
-  /// Datos de la luz (pose, atenuación, etc.) pre-construidos en Configure
-  sdf::Light lightSdf;
+  // Poses: activa (real) y oculta (underground)
+  static constexpr double kHiddenZ = -10000.0;
+  gz::math::Pose3d lightActivePose{0, 0, 0.85, 0, 0, 0};
+  gz::math::Pose3d domeActivePose {0, 0, 0.80, 0, 0, 0};
+  gz::math::Pose3d hiddenPose     {0, 0, kHiddenZ, 0, 0, 0};
 
   std::string color{"blue"};
   std::string mode{"solid"};
   double blinkPeriod{1.0};
 
   bool initialized{false};
-  bool currentOn{false};  ///< Arranca en false para forzar creación inicial
+  bool entitiesFound{false};
+  bool currentOn{true};  ///< Arranca en true (luz visible por defecto en SDF)
 };
 
 }  // namespace robotx
