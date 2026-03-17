@@ -4,9 +4,6 @@ project(robotx_light_buoy)
 find_package(gz-sim7    REQUIRED)
 find_package(gz-plugin2 REQUIRED)
 find_package(gz-math7   REQUIRED)
-
-# sdformat13 ya viene como dependencia transitiva de gz-sim7,
-# pero lo buscamos explícitamente para mayor claridad.
 find_package(sdformat13 REQUIRED)
 
 add_library(RobotXLightBuoySystem SHARED
