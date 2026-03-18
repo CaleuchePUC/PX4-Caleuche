@@ -52,6 +52,28 @@ To run the world file for Task 7, first uncomment the 5th line in the x500_mono_
 PX4_GZ_WORLD=custom_uav_replenishment make px4_sitl gz_x500_mono_cam
 ```
 
+#### Task 1 — Safe Passage: Light Buoy World
+A dedicated world for the RobotX 2026 Task 1 "Safe Passage" was added. It contains two `robotx_light_buoy` instances that simulate the channel marker buoys:
+- **`buoy_flashing_blue`** — parpadea a 1 Hz (modo `flashing`)
+- **`buoy_solid_blue`** — encendida constantemente (modo `solid`)
+
+The light buoy plugin is compiled separately. Before launching, export the plugin path:
+```bash
+export GZ_SIM_SYSTEM_PLUGIN_PATH=$PWD/Tools/simulation/gz/plugins/robotx_light_buoy/build
+```
+
+Then launch the simulation:
+```bash
+PX4_GZ_WORLD=light_buoy_world make px4_sitl gz_x500_mono_cam
+```
+
+> **Note:** The plugin must be compiled before running. To build it:
+> ```bash
+> cd Tools/simulation/gz/plugins/robotx_light_buoy
+> mkdir -p build && cd build
+> cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc)
+> ```
+
 
 ## Changes to uXRCE-DDS Client
 Some changes were made to the uXRCE-DDS Client, to expose some uORB topics to the ROS2 enviroment. This is achieved by modifying the ```dds_topics.yaml``` file ```src/modules/uxrce_dds_client```. The extra topics exposed are:
