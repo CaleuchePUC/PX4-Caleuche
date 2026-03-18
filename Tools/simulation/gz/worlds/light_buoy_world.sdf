@@ -145,17 +145,17 @@
     </include>
 
     <!--
-      Boya 2 — SOLID RED
-      Encendida constantemente en rojo. Referencia: boya de babor.
+      Boya 2 — SOLID BLUE
+      Encendida constantemente en azul. Referencia: boya de babor.
     -->
     <include>
       <uri>model://robotx_light_buoy</uri>
-      <name>buoy_solid_red</name>
+      <name>buoy_solid_blue</name>
       <pose>5 2 0 0 0 0</pose>
       <plugin
         filename="gz-sim-robotx-light-buoy-system"
         name="robotx::RobotXLightBuoySystem">
-        <color>red</color>
+        <color>blue</color>
         <mode>solid</mode>
         <blink_period>1.0</blink_period>
       </plugin>
