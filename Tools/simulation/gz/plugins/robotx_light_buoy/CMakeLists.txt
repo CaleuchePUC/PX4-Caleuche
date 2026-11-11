@@ -24,3 +24,23 @@ target_link_libraries(RobotXLightBuoySystem PUBLIC
 set_target_properties(RobotXLightBuoySystem PROPERTIES
   OUTPUT_NAME gz-sim-robotx-light-buoy-system
 )
+
+# Beacon plugin for the robotx_buoy_<color> models
+add_library(RobotXBuoySystem SHARED
+  RobotXBuoySystem.cc
+)
+
+target_include_directories(RobotXBuoySystem PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(RobotXBuoySystem PUBLIC
+  gz-sim7::gz-sim7
+  gz-plugin2::gz-plugin2
+  gz-math7::gz-math7
+  sdformat13::sdformat13
+)
+
+set_target_properties(RobotXBuoySystem PROPERTIES
+  OUTPUT_NAME gz-sim-robotx-buoy-system
+)

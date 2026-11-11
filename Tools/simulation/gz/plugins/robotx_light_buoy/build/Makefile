@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/crisovix/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy
+CMAKE_SOURCE_DIR = /home/maxipis/Caleuche/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/crisovix/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build
+CMAKE_BINARY_DIR = /home/maxipis/Caleuche/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/crisovix/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build/CMakeFiles /home/crisovix/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maxipis/Caleuche/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build/CMakeFiles /home/maxipis/Caleuche/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/crisovix/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maxipis/Caleuche/PX4-Caleuche/Tools/simulation/gz/plugins/robotx_light_buoy/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,43 @@ RobotXLightBuoySystem/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotXLightBuoySystem.dir/build.make CMakeFiles/RobotXLightBuoySystem.dir/build
 .PHONY : RobotXLightBuoySystem/fast
 
+#=============================================================================
+# Target rules for targets named RobotXBuoySystem
+
+# Build rule for target.
+RobotXBuoySystem: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RobotXBuoySystem
+.PHONY : RobotXBuoySystem
+
+# fast build rule for target.
+RobotXBuoySystem/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotXBuoySystem.dir/build.make CMakeFiles/RobotXBuoySystem.dir/build
+.PHONY : RobotXBuoySystem/fast
+
+RobotXBuoySystem.o: RobotXBuoySystem.cc.o
+.PHONY : RobotXBuoySystem.o
+
+# target to build an object file
+RobotXBuoySystem.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotXBuoySystem.dir/build.make CMakeFiles/RobotXBuoySystem.dir/RobotXBuoySystem.cc.o
+.PHONY : RobotXBuoySystem.cc.o
+
+RobotXBuoySystem.i: RobotXBuoySystem.cc.i
+.PHONY : RobotXBuoySystem.i
+
+# target to preprocess a source file
+RobotXBuoySystem.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotXBuoySystem.dir/build.make CMakeFiles/RobotXBuoySystem.dir/RobotXBuoySystem.cc.i
+.PHONY : RobotXBuoySystem.cc.i
+
+RobotXBuoySystem.s: RobotXBuoySystem.cc.s
+.PHONY : RobotXBuoySystem.s
+
+# target to generate assembly for a file
+RobotXBuoySystem.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotXBuoySystem.dir/build.make CMakeFiles/RobotXBuoySystem.dir/RobotXBuoySystem.cc.s
+.PHONY : RobotXBuoySystem.cc.s
+
 RobotXLightBuoySystem.o: RobotXLightBuoySystem.cc.o
 .PHONY : RobotXLightBuoySystem.o
 
@@ -161,7 +198,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... RobotXBuoySystem"
 	@echo "... RobotXLightBuoySystem"
+	@echo "... RobotXBuoySystem.o"
+	@echo "... RobotXBuoySystem.i"
+	@echo "... RobotXBuoySystem.s"
 	@echo "... RobotXLightBuoySystem.o"
 	@echo "... RobotXLightBuoySystem.i"
 	@echo "... RobotXLightBuoySystem.s"

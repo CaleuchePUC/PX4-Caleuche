@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <!--
+    RobotX Task 1 buoy with a red top beacon (seen by the UAV).
+      body    model://robotx_buoy_body (panels, diamonds, frame, float), top at z = 0.3048 m
+      beacon  dimensions from uav_ws/buoy_dim.png, on top of the body:
+              disk diameter 10 in (0.254 m), thickness 1/4 in (0.00635 m), black
+              light hole diameter 3.07 in -> lit sphere radius 0.038 m
+              housing: simplified cylinder under the disk (estimated)
+    The sphere center sits on the disk top, so from above it shows a lit circle of
+    ~76 mm, about the size of the real hole.
+    RobotXBuoySystem swaps beacon_light_on / beacon_light_off to blink.
+  -->
+  <model name="robotx_buoy_red">
+    <static>true</static>
+
+    <include>
+      <uri>model://robotx_buoy_body</uri>
+      <name>body</name>
+    </include>
+
+    <link name="base_link">
+
+      <!-- Beacon housing (simplified) -->
+      <visual name="housing_visual">
+        <pose>0 0 0.3698 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.049</radius>
+            <length>0.13</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.85 0.85 0.85 1</ambient>
+          <diffuse>0.85 0.85 0.85 1</diffuse>
+        </material>
+      </visual>
+
+      <collision name="housing_collision">
+        <pose>0 0 0.3698 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.049</radius>
+            <length>0.13</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- Black disk -->
+      <visual name="disk_visual">
+        <pose>0 0 0.437975 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.127</radius>
+            <length>0.00635</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.02 1</ambient>
+          <diffuse>0.02 0.02 0.02 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+
+      <collision name="disk_collision">
+        <pose>0 0 0.437975 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.127</radius>
+            <length>0.00635</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- Light ON: emissive sphere. Its pose is the active beacon pose read by the plugin. -->
+      <visual name="beacon_light_on">
+        <pose>0 0 0.44115 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.038</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <emissive>1 0 0 1</emissive>
+        </material>
+      </visual>
+
+      <!-- Light OFF: dark sphere. Starts hidden; the plugin moves it in when the light is off. -->
+      <visual name="beacon_light_off">
+        <pose>0 0 -10000 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.038</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.05 0.05 0.05 1</ambient>
+          <diffuse>0.05 0.05 0.05 1</diffuse>
+          <emissive>0 0 0 1</emissive>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,264 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <!--
+    RobotX RoboBuoy body (no beacon). Dimensions from uav_ws/lateral_dim.png and base_dim.png:
+      side panels   trapezoids 17 in bottom, 7.25 in top, 12 in high -> square frustum
+                    (meshes/robotx_buoy_frustum.stl), off-white
+      diamonds      black, side 5.5 in (estimated from united.png), one per panel
+      base frame    3/4 in PVC (OD 1.05 in), 15.25 in square + 2 inner bars
+      float         pool noodle, diameter 2.5 in (estimated), around the panel bottom edge
+    Origin at the bottom of the panels (water surface); panel top at z = 0.3048 m.
+    The robotx_buoy_<color> models include this body and put the beacon on top.
+  -->
+  <model name="robotx_buoy_body">
+    <static>true</static>
+    <link name="body_link">
+      <visual name="panels_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://robotx_buoy_body/meshes/robotx_buoy_frustum.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="diamond_0_visual">
+        <pose>0.155377 0 0.152965 1.04932 0.714329 1.210819</pose>
+        <geometry>
+          <box>
+            <size>0.1397 0.1397 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.02 1</ambient>
+          <diffuse>0.02 0.02 0.02 1</diffuse>
+        </material>
+      </visual>
+      <visual name="diamond_1_visual">
+        <pose>0 0.155377 0.152965 1.04932 0.714329 2.781615</pose>
+        <geometry>
+          <box>
+            <size>0.1397 0.1397 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.02 1</ambient>
+          <diffuse>0.02 0.02 0.02 1</diffuse>
+        </material>
+      </visual>
+      <visual name="diamond_2_visual">
+        <pose>-0.155377 0 0.152965 1.04932 0.714329 -1.930774</pose>
+        <geometry>
+          <box>
+            <size>0.1397 0.1397 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.02 1</ambient>
+          <diffuse>0.02 0.02 0.02 1</diffuse>
+        </material>
+      </visual>
+      <visual name="diamond_3_visual">
+        <pose>0 -0.155377 0.152965 1.04932 0.714329 -0.359977</pose>
+        <geometry>
+          <box>
+            <size>0.1397 0.1397 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.02 1</ambient>
+          <diffuse>0.02 0.02 0.02 1</diffuse>
+        </material>
+      </visual>
+      <visual name="frame_side_0_visual">
+        <pose>0.193675 0 0.013335 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.013335</radius>
+            <length>0.38735</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="frame_side_1_visual">
+        <pose>0 0.193675 0.013335 1.570796 0 1.570796</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.013335</radius>
+            <length>0.38735</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="frame_side_2_visual">
+        <pose>-0.193675 0 0.013335 1.570796 0 3.141593</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.013335</radius>
+            <length>0.38735</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="frame_side_3_visual">
+        <pose>0 -0.193675 0.013335 1.570796 0 4.712389</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.013335</radius>
+            <length>0.38735</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="frame_bar_0_visual">
+        <pose>0 -0.08128 0.013335 0 1.570796 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.013335</radius>
+            <length>0.38735</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="frame_bar_1_visual">
+        <pose>0 0.08128 0.013335 0 1.570796 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.013335</radius>
+            <length>0.38735</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.9 0.88 0.82 1</ambient>
+          <diffuse>0.9 0.88 0.82 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_side_0_visual">
+        <pose>0.24765 0 0.03175 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03175</radius>
+            <length>0.4953</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_corner_0_visual">
+        <pose>0.24765 0.24765 0.03175 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.03175</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_side_1_visual">
+        <pose>0 0.24765 0.03175 1.570796 0 1.570796</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03175</radius>
+            <length>0.4953</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_corner_1_visual">
+        <pose>-0.24765 0.24765 0.03175 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.03175</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_side_2_visual">
+        <pose>-0.24765 0 0.03175 1.570796 0 3.141593</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03175</radius>
+            <length>0.4953</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_corner_2_visual">
+        <pose>-0.24765 -0.24765 0.03175 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.03175</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_side_3_visual">
+        <pose>0 -0.24765 0.03175 1.570796 0 4.712389</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03175</radius>
+            <length>0.4953</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+      <visual name="noodle_corner_3_visual">
+        <pose>0.24765 -0.24765 0.03175 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.03175</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>0.7 0.45 0.85 1</ambient>
+          <diffuse>0.7 0.45 0.85 1</diffuse>
+        </material>
+      </visual>
+
+      <collision name="panels_collision">
+        <geometry>
+          <mesh>
+            <uri>model://robotx_buoy_body/meshes/robotx_buoy_frustum.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
